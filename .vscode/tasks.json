@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run with PHP 7.0",
+      "type": "shell",
+      "command": "${workspaceFolder}/php_run_tasks.sh",
+      "args": [
+        "php70",
+        "${file}"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run with PHP 7.4",
+      "type": "shell",
+      "command": "${workspaceFolder}/php_run_tasks.sh",
+      "args": [
+        "php74",
+        "${file}"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run with PHP 8.0",
+      "type": "shell",
+      "command": "${workspaceFolder}/php_run_tasks.sh",
+      "args": [
+        "php80",
+        "${file}"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run with PHP 8.2",
+      "type": "shell",
+      "command": "${workspaceFolder}/php_run_tasks.sh",
+      "args": [
+        "php82",
+        "${file}"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+

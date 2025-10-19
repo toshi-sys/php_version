@@ -1,0 +1,25 @@
+FROM php:7.0-fpm-alpine
+
+# 必要なパッケージを Alpine の apk でインストール
+RUN apk update && apk add --no-cache \
+    git \
+    unzip \
+    curl
+
+# Xdebug をインストール（PHP 7.0 対応版）
+#RUN pecl install xdebug-2.9.0 && docker-php-ext-enable xdebug
+
+# Xdebug 設定ファイルを追加
+#RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/xdebug.ini \
+#   && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/xdebug.ini \
+#   && echo "xdebug.client_host=10.255.255.254" >> /usr/local/etc/php/conf.d/xdebug.ini \
+#   && echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/xdebug.ini \
+#   && echo "xdebug.log_level=0" >> /usr/local/etc/php/conf.d/xdebug.ini \
+#   && echo "xdebug.idekey=VSCODE" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# Composer インストール
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod +x /usr/local/bin/composer
+
+CMD ["php-fpm"]

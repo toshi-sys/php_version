@@ -1,0 +1,49 @@
+# PHP 7.4 + FPM ベース
+FROM php:7.4-fpm
+
+# 必要なパッケージと PHP 拡張をインストール
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    libzip-dev \
+    libpq-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install \
+        pdo \
+        pdo_mysql \
+        mbstring \
+        zip \
+        gd \
+        bcmath \
+        opcache
+
+# Xdebug をインストール（PHP 7.4 対応版）
+RUN apt-get update && apt-get install -y \
+    autoconf \
+    gcc \
+    make \
+    libtool \
+    && pecl install xdebug-3.1.6 \
+    && docker-php-ext-enable xdebug \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Xdebug 設定ファイルを追加
+RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/xdebug.ini \
+#    && echo "xdebug.client_host=10.255.255.254" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.log_level=0" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.idekey=VSCODE" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# Composer をグローバルインストール
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && chmod +x /usr/local/bin/composer
