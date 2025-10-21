@@ -123,8 +123,9 @@ PHP_VERSION
 ├── php.sh (phpパス、setting.jsonに呼ばれる　※効いてる？)
 ├── README.md  
 ├── rm.sh (コンテナ一括削除)  
-└── setup_containers.sh (コンテナ一括生成)  
-└── setup_vscode_setting.sh (vscode setting.jsonファイル作成・更新)  
+├── setup_containers.sh (コンテナ一括生成)  
+├── setup_vscode_setting.sh (vscode setting.jsonファイル作成・更新)  
+└── start_containers.sh (停止中のコンテナ一括起動)  
 ```
 
   
